@@ -29,7 +29,7 @@ public class BookMapper {
             throw new IllegalArgumentException("Author with that id is not found");
         }
 
-        Optional<MyUser> foundUser = userRepository.findById(bookDto.getUser_id());
+        Optional<MyUser> foundUser = userRepository.findById(bookDto.getUserId());
         if(foundUser.isEmpty()) {
             throw new IllegalArgumentException("User with that id is not found!");
         }
@@ -51,7 +51,7 @@ public class BookMapper {
         dto.setTitle(book.getTitle());
         dto.setAuthorId(book.getAuthor().getId());
         dto.setGenre(book.getGenre());
-        dto.setUser_id(book.getUser().getId());
+        dto.setUserId(book.getUser().getId());
         dto.setPublicationYear(book.getPublicationYear());
         dto.setStatus(book.getStatus());
 

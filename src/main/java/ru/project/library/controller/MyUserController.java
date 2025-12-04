@@ -24,7 +24,8 @@ public class MyUserController {
         Optional<List<MyUserDto>> users = userService.findAll();
         if(users.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(users);
-        } else return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/find/{id}")

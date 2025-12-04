@@ -40,7 +40,7 @@ public class AuthorController {
 
     @PostMapping("/save")
     public ResponseEntity<AuthorDto> save(@RequestBody AuthorDto authorDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(authorDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authorService.save(authorDto));
     }
 
     @DeleteMapping("/delete/{id}")

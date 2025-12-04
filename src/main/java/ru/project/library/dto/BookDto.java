@@ -8,18 +8,18 @@ public class BookDto {
     private String title;
     private Long authorId;
     private Genre genre;
-    private Long user_id;
+    private Long userId;
     private Integer publicationYear;
     private ReadingStatus status;
 
     public BookDto() {
     }
 
-    public BookDto(String title, Long authorId, Genre genre, Long user_id, Integer publicationYear, ReadingStatus status) {
+    public BookDto(String title, Long authorId, Genre genre, Long userId, Integer publicationYear, ReadingStatus status) {
         this.title = title;
         this.authorId = authorId;
         this.genre = genre;
-        this.user_id = user_id;
+        this.userId = userId;
         this.publicationYear = publicationYear;
         this.status = status;
     }
@@ -48,12 +48,12 @@ public class BookDto {
         this.genre = genre;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Integer getPublicationYear() {
