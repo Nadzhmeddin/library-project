@@ -2,8 +2,8 @@ package ru.project.library.enums;
 
 public enum UserRole {
 
-    USER("user"),
-    ADMIN("admin");
+    USER("USER"),
+    ADMIN("ADMIN");
 
     private String role;
 
