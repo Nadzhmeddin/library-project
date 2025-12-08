@@ -3,6 +3,8 @@ package ru.project.library.service.impl;
 import org.springframework.stereotype.Service;
 import ru.project.library.dto.AuthorDto;
 import ru.project.library.entity.Author;
+import ru.project.library.exception.author_exception.IllegalAuthorExistException;
+import ru.project.library.exception.author_exception.IllegalAuthorNameException;
 import ru.project.library.mapper.AuthorMapper;
 import ru.project.library.repository.AuthorRepository;
 import ru.project.library.service.AuthorService;
@@ -44,8 +46,12 @@ public class AuthorServiceImpl implements AuthorService {
         List<Author> authors = authorRepository.findAll();
         for (Author author : authors) {
             if(author.getName().equalsIgnoreCase(authorDto.getName())) {
-                throw new IllegalArgumentException("Author with that name is exist");
+                throw new IllegalAuthorExistException("Автор с таким именем уже добавлен! Ваш ввод: " + authorDto.getName());
             }
+        }
+
+        if(authorDto.getName().isEmpty()) {
+            throw new IllegalAuthorNameException("Имя автора не может быть пустым! Ваш ввод: " + authorDto.getName());
         }
         Author savedAuthor = authorRepository.save(mapper.toEntity(authorDto));
         return mapper.toDto(savedAuthor);
