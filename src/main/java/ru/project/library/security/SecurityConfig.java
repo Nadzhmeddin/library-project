@@ -31,9 +31,12 @@ public class SecurityConfig {
         return http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/api/v1/authenticate").permitAll();
             auth.requestMatchers("/api/v1/users/save").permitAll();
-            auth.requestMatchers("/api/v1/users/delete/", "/api/v1/users/find/", "/api/v1/users").hasAnyRole("ADMIN", "USER");
-            auth.requestMatchers("/api/v1/books/**").hasAnyRole("ADMIN", "USER");
-            auth.requestMatchers("/api/v1/authors/**").hasAnyRole("ADMIN", "USER");
+            auth.requestMatchers("/api/v1/users/find/**").hasAnyRole("USER", "ADMIN");
+            auth.requestMatchers("/api/v1/users/delete/", "/api/v1/users").hasAnyRole("ADMIN");
+            auth.requestMatchers("/api/v1/books/find/**", "/api/v1/books/save").hasAnyRole("ADMIN", "USER");
+            auth.requestMatchers("/api/v1/books/delete/", "/api/v1/books").hasRole("ADMIN");
+            auth.requestMatchers("/api/v1/authors/save", "/api/v1/authors/find/**").hasAnyRole("ADMIN", "USER");
+            auth.requestMatchers("/api/v1/authors", "/api/v1/authors/delete/**").hasRole("ADMIN");
             auth.anyRequest().authenticated();
         })
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)

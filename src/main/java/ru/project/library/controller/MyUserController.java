@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.project.library.dto.MyUserDto;
+import ru.project.library.exception.user_exception.IllegalUserPasswordException;
 import ru.project.library.service.impl.MyUserServiceImpl;
 
 import java.util.List;
@@ -15,11 +16,9 @@ import java.util.Optional;
 public class MyUserController {
 
     private final MyUserServiceImpl userService;
-    private final PasswordEncoder passwordEncoder;
 
-    public MyUserController(MyUserServiceImpl userService, PasswordEncoder passwordEncoder) {
+    public MyUserController(MyUserServiceImpl userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -42,7 +41,6 @@ public class MyUserController {
 
     @PostMapping("/save")
     public ResponseEntity<MyUserDto> saveUser(@RequestBody MyUserDto dto) {
-        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(dto));
     }
 

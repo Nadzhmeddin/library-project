@@ -6,12 +6,12 @@ public class MyUserDto {
     private String username;
     private String email;
     private String password;
-    private UserRole userRole;
+    private String userRole;
 
     public MyUserDto() {
     }
 
-    public MyUserDto(String username, String email, String password, UserRole userRole) {
+    public MyUserDto(String username, String email, String password, String userRole) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -42,11 +42,11 @@ public class MyUserDto {
         this.password = password;
     }
 
-    public UserRole getUserRole() {
+    public String getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(UserRole userRole) {
+    public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 

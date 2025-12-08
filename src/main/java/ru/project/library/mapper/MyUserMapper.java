@@ -3,6 +3,8 @@ package ru.project.library.mapper;
 import org.springframework.stereotype.Service;
 import ru.project.library.dto.MyUserDto;
 import ru.project.library.entity.MyUser;
+import ru.project.library.enums.UserRole;
+import ru.project.library.exception.user_exception.IllegalUserRoleException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +19,18 @@ public class MyUserMapper {
         myUser.setUsername(userDto.getUsername());
         myUser.setPassword(userDto.getPassword());
         myUser.setEmail(userDto.getEmail());
-        myUser.setRole(userDto.getUserRole());
 
+        if(userDto.getUserRole().equalsIgnoreCase("user")) {
+            myUser.setRole(UserRole.USER);
+        }
+
+        else if(userDto.getUserRole().equalsIgnoreCase("admin")) {
+            myUser.setRole(UserRole.ADMIN);
+        }
+
+        else {
+            throw new IllegalUserRoleException("Ошибка ввода роли! Роль может быть либо USER либо ADMIN. Ваш ввод: " + userDto.getUserRole());
+        }
         return myUser;
     }
 
@@ -29,7 +41,7 @@ public class MyUserMapper {
         dto.setUsername(user.getUsername());
         dto.setPassword(user.getPassword());
         dto.setEmail(user.getEmail());
-        dto.setUserRole(user.getRole());
+        dto.setUserRole(user.getRole().getRole());
 
         return dto;
     }
