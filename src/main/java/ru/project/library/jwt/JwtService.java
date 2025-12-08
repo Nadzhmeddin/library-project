@@ -1,18 +1,19 @@
 package ru.project.library.jwt;
 
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+@Service
 public class JwtService {
 
     public static final String SECRET = "c4d7ea562f607c47f7e505caa8491e76cc4eb1fdd85163daa39eff69458217ead1e654d8b540d8507478985222a4ca1ff5faf90f522bd1b6968bcd1a27d05f98";
@@ -33,5 +34,23 @@ public class JwtService {
         return new SecretKeySpec(decodedKey, "HmacSHA512");
     }
 
+    public String extractUsername(String jwt) {
+        Claims claims = getClaims(jwt);
+        return claims.getSubject();
+    }
 
+
+    public boolean isTokenValid(String jwt) {
+        Claims claims = getClaims(jwt);
+        return claims.getExpiration().after(Date.from(Instant.now()));
+    }
+
+    private Claims getClaims(String jwt) {
+        Claims claims = Jwts.parser()
+                .verifyWith(generateKey())
+                .build()
+                .parseSignedClaims(jwt)
+                .getPayload();
+        return claims;
+    }
 }

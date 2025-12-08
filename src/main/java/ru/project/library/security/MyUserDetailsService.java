@@ -11,11 +11,11 @@ import ru.project.library.repository.MyUserRepository;
 import java.util.Optional;
 
 @Service
-public class MyUserDetails implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
 
     private final MyUserRepository repository;
 
-    public MyUserDetails(MyUserRepository repository) {
+    public MyUserDetailsService(MyUserRepository repository) {
         this.repository = repository;
     }
 
