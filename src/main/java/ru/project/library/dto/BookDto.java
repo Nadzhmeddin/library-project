@@ -7,7 +7,7 @@ public class BookDto {
 
     private String title;
     private Long authorId;
-    private Genre genre;
+    private String genre;
     private Long userId;
     private Integer publicationYear;
     private ReadingStatus status;
@@ -15,7 +15,7 @@ public class BookDto {
     public BookDto() {
     }
 
-    public BookDto(String title, Long authorId, Genre genre, Long userId, Integer publicationYear, ReadingStatus status) {
+    public BookDto(String title, Long authorId, String genre, Long userId, Integer publicationYear, ReadingStatus status) {
         this.title = title;
         this.authorId = authorId;
         this.genre = genre;
@@ -40,11 +40,11 @@ public class BookDto {
         this.authorId = authorId;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
